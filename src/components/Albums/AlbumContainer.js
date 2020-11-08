@@ -27,7 +27,7 @@ function AlbumContainer(props) {
   }, []);
 
 
-  if (!isLoaded) {
+  if (!isLoaded || !photos) {
     return (
       <li key={albumId} className="albums_item">
         <NavLink

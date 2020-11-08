@@ -52,6 +52,8 @@ function AlbumsContainer() {
       return <Preloader />;
     } else if (error) {
       return <ErrorMessage message={error.message} />;
+    } else if (!albums || !user) {
+      return <Preloader />;
     } else if (isLoaded) {
         return <Albums albums={albums} user={user} />
     }

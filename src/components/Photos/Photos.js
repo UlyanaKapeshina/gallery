@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Photo from "./Photo";
+import PropTypes from 'prop-types';
 import "./Photos.css";
 import { ReactComponent as Before } from "./navigate_before-24px.svg";
 
 function Photos(props) {
   
   const { userId, albumId } = useParams();
-  const { photos, title, modal, photo } = props;
+  const { photos, title, modal, photo, history } = props;
   const [isModal, setIsModal] = useState(modal);
   const [currentPhoto, setCurrentPhoto] = useState(photo);
   const ref = React.createRef();
@@ -26,10 +27,10 @@ function Photos(props) {
   const closePhotoHandler = () => {
     setIsModal(false);
     setCurrentPhoto(null);
-    props.history.push(`/users/${userId}/albums/${albumId}/photos`);
+    history.push(`/users/${userId}/albums/${albumId}/photos`);
   };
   const changeUrl = (id) => {
-    props.history.push(`/users/${userId}/albums/${albumId}/photos/${id}`);
+    history.push(`/users/${userId}/albums/${albumId}/photos/${id}`);
   };
 
   const photosList = photos.map((it) => {
@@ -80,3 +81,18 @@ function Photos(props) {
 }
 
 export default Photos;
+
+Photos.propTypes = {
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    albumId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    thumbnailUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })).isRequired, 
+ 
+  title: PropTypes.string.isRequired,
+  modal: PropTypes.bool.isRequired,
+  photo: PropTypes.object,
+  history: PropTypes.object.isRequired
+};

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 import "./Users.css";
 
 function Users(props) {
@@ -7,7 +8,7 @@ function Users(props) {
 
   const usersList = users.map((it) => {
     return (
-      <li className="users_item">
+      <li className="users_item" key={it.id}>
         <NavLink
           className="users_link"
           to={{
@@ -32,3 +33,10 @@ function Users(props) {
 }
 
 export default Users;
+
+Users.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired, 
+};

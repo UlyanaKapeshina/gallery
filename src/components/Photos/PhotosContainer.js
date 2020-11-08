@@ -54,7 +54,7 @@ function PhotosContainer(props) {
       });
   }, []);
 
-  if (!isLoaded) {
+  if (!isLoaded || !photos) {
     return <Preloader />;
   } else if (error) {
     return <ErrorMessage message={error.message} />;

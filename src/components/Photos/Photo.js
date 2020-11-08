@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Photos.css";
 import { ReactComponent as Next } from "./navigate_next-24px.svg";
 import { ReactComponent as Before } from "./navigate_before-24px.svg";
+import PropTypes from 'prop-types';
+import "./Photos.css";
 
 function Photo(props) {
   const { photo, photos, closePhotoHandler, changeUrl } = props;
@@ -78,3 +79,21 @@ function Photo(props) {
 }
 
 export default Photo;
+
+Photo.propTypes = {
+  photo:PropTypes.shape({
+    albumId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    thumbnailUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired, 
+  photos: PropTypes.arrayOf(PropTypes.shape({   
+    id: PropTypes.number.isRequired    
+  })).isRequired, 
+ 
+  closePhotoHandler: PropTypes.func.isRequired,
+  changeUrl: PropTypes.func.isRequired,
+  
+
+};

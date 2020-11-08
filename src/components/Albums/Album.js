@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { api } from "./../../api";
-import Preloader from "./../Preloader/Preloader";
-import ErrorMessage from "./../Error/ErrorMessage";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 import "./Albums.css"
 
 function Album(props) {
@@ -45,3 +43,15 @@ setIsFocus(false);
 }
 
 export default Album;
+
+Album.propTypes = {
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    albumId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    thumbnailUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })).isRequired, 
+  albumId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired
+};

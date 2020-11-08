@@ -21,10 +21,12 @@ function UsersContainer() {
       });
   }, []);
 
-  if (!isLoaded) {
+  if (!isLoaded ) {
     return <Preloader />;
   } else if (error) {
     return <ErrorMessage message={error.message} />;
+  } else if (!users) {
+    return <Preloader />;
   } else if (isLoaded) {
     return <Users users={users} />;
   }
